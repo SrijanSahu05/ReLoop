@@ -1,0 +1,8 @@
+# Ignore node_modules in all subfolders
+**/node_modules/
+
+# Ignore environment variables (passwords/API keys)
+**/.env
+
+# Ignore Mac system files
+.DS_Store
