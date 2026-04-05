@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(cors({
     origin: 'https://re-loop-two.vercel.app',
     credentials: true
-}))
+}));
 
 app.get('/', (_, res) => {
     console.log("Hello from the backend! Server is running.");
