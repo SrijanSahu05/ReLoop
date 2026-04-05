@@ -31,7 +31,7 @@ socketHandler(io);
 // Middleware to parse JSON bodies
 app.use(express.json());
 app.use(cors({
-    origin: 'https://re-loop-two.vercel.app',
+    origin: 'https://re-loop-to059ndm5-srijan-sahus-projects.vercel.app',
     credentials: true
 }))
 
