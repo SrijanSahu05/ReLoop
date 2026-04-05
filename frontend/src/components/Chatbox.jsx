@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { SocketContext } from "../context/SocketContext";
 import axios from "axios";
 import { X } from "lucide-react";
+import BASE_URL from "../config/api";
 
 const ChatBox = ({ productId, sellerId, onClose }) => {
   const [conversation, setConversation] = useState(null);
@@ -26,7 +27,7 @@ const ChatBox = ({ productId, sellerId, onClose }) => {
     const createConversation = async () => {
       try {
         const res = await axios.post(
-          "http://localhost:8000/api/chat/conversation",
+          `${BASE_URL}/api/chat/conversation`,
           {
             senderId: currentUser._id,
             receiverId: sellerId,
@@ -55,7 +56,7 @@ const ChatBox = ({ productId, sellerId, onClose }) => {
       if (productId && !productDetails) {
         try {
           const prodRes = await axios.get(
-            `http://localhost:8000/product/${productId}`
+            `${BASE_URL}/product/${productId}`
           );
           const productData = prodRes.data.viewSingleProduct || prodRes.data;
 
@@ -72,7 +73,7 @@ const ChatBox = ({ productId, sellerId, onClose }) => {
       if (partnerId && !chatPartner) {
         try {
           const userRes = await axios.get(
-            `http://localhost:8000/user/${partnerId}`,
+            `${BASE_URL}/user/${partnerId}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -95,7 +96,7 @@ const ChatBox = ({ productId, sellerId, onClose }) => {
     const fetchMessages = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/chat/message/${conversation._id}`,
+          `${BASE_URL}/api/chat/message/${conversation._id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -159,7 +160,7 @@ const ChatBox = ({ productId, sellerId, onClose }) => {
       ]);
 
       const res = await axios.post(
-        "http://localhost:8000/api/chat/message",
+        `${BASE_URL}/api/chat/message`,
         {
           conversationId: conversation?._id || null,
           sender: currentUser._id,
@@ -225,7 +226,7 @@ const ChatBox = ({ productId, sellerId, onClose }) => {
                 if (!imgString) return "";
                 return imgString.startsWith("http")
                   ? imgString
-                  : `http://localhost:8000/${imgString.replace(/^\//, "")}`;
+                  : `${BASE_URL}/${imgString.replace(/^\//, "")}`;
               })()}
               alt={productDetails.productName || "Product"}
               className="w-12 h-12 rounded-full object-cover shadow-sm border border-gray-200"

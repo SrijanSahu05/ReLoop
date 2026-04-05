@@ -11,6 +11,7 @@ import {
   LogOut,
   X,
 } from "lucide-react";
+import BASE_URL from "../config/api";
 
 const DashboardSidebar = ({
   updateUser,
@@ -34,7 +35,7 @@ const DashboardSidebar = ({
   const handleLogout = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:8000/user/logout",
+        `${BASE_URL}/user/logout`,
         {},
         {
           headers: {

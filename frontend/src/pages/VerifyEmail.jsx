@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import BASE_URL from "../config/api";
 
 const VerifyEmail = () => {
   const location = useLocation(); // Access the passed state
@@ -49,7 +50,7 @@ const VerifyEmail = () => {
     try {
       setLoading(true);
 
-      const res = await axios.post(`http://localhost:8000/user/verify-email`, {
+      const res = await axios.post(`${BASE_URL}/user/verify-email`, {
         email,
         otp,
       });
@@ -70,7 +71,7 @@ const VerifyEmail = () => {
 
   const handleResendOTP = async () => {
     try {
-      await axios.post(`http://localhost:8000/user/resend-otp`, { email });
+      await axios.post(`${BASE_URL}/user/resend-otp`, { email });
       toast.success("OTP resent successfully! Please check your email.");
       setTimeLeft(600); // Reset timer to 10 minutes
     } catch (error) {

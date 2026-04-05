@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
+import BASE_URL from '../config/api';
 
 const PublishProduct = () => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -76,7 +77,7 @@ const PublishProduct = () => {
           formData.append("city", user?.city);
           formData.append("state", user?.state);
 
-          const res = await axios.post("http://localhost:8000/product/add", formData, {
+          const res = await axios.post(`${BASE_URL}/product/add`, formData, {
               headers: {
                   Authorization: `Bearer ${accessToken}`,
               },

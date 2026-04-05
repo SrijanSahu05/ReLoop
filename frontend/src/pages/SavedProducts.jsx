@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ProductCards from "../components/ProductCards";
+import BASE_URL from "../config/api";
 
 const SavedProducts = () => {
   const [savedProducts, setSavedProducts] = useState([]);
@@ -12,7 +13,7 @@ const SavedProducts = () => {
       setLoading(true);
       const accessToken = localStorage.getItem("accessToken");
       const res = await axios.get(
-        "http://localhost:8000/user/getsavedProducts",
+        `${BASE_URL}/user/getsavedProducts`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

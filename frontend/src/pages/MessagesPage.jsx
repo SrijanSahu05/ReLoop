@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ChatBox from "../components/Chatbox";
+import BASE_URL from "../config/api";
 
 const MessagesPage = () => {
   const [conversations, setConversations] = useState([]);
@@ -20,7 +21,7 @@ const MessagesPage = () => {
       try {
         // Fetch all conversations for this user
         const res = await axios.get(
-          `http://localhost:8000/api/chat/conversations/${currentUser._id}`,
+          `${BASE_URL}/api/chat/conversations/${currentUser._id}`,
           {
             headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
           }
@@ -33,7 +34,7 @@ const MessagesPage = () => {
           convos.map(async (convo) => {
             const partnerId = convo.members.find((id) => id !== currentUser._id);
             try {
-              const userRes = await axios.get(`http://localhost:8000/user/${partnerId}`, {
+              const userRes = await axios.get(`${BASE_URL}/user/${partnerId}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
               });
               return { ...convo, partner: userRes.data.user || userRes.data };
@@ -61,7 +62,7 @@ const MessagesPage = () => {
     const imgData = product.productImg[0];
     const imgString = typeof imgData === "object" ? imgData.path || imgData.url || imgData.filename : imgData;
     if (!imgString) return null;
-    return imgString.startsWith("http") ? imgString : `http://localhost:8000/${imgString.replace(/^\//, "")}`;
+    return imgString.startsWith("http") ? imgString : `${BASE_URL}/${imgString.replace(/^\//, "")}`;
   };
 
   if (loading) {

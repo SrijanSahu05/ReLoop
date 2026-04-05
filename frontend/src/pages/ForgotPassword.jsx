@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import BASE_URL from "../config/api";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ const ForgotPassword = () => {
       setSendingOtp(true);
 
       await axios.post(
-        "http://localhost:8000/user/forgot-password",
+        `${BASE_URL}/user/forgot-password`,
         { email }
       );
 
@@ -78,7 +79,7 @@ const ForgotPassword = () => {
       setVerifyingOtp(true);
 
       const res = await axios.post(
-        "http://localhost:8000/user/verify-reset-password-otp",
+        `${BASE_URL}/user/verify-reset-password-otp`,
         { email, otp }
       );
 

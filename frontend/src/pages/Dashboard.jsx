@@ -9,6 +9,7 @@ import { PanelLeft } from "lucide-react";
 import PublishProduct from "./PublishProduct";
 import SavedProducts from "./SavedProducts";
 import MessagesPage from "./MessagesPage";
+import BASE_URL from "../config/api";
 
 const Dashboard = () => {
   const { userId } = useParams();
@@ -36,7 +37,7 @@ const Dashboard = () => {
     const accessToken = localStorage.getItem("accessToken");
     try {
       setLoading(true);
-      const res = await axios.get(`http://localhost:8000/product/myProducts/${userId}`,
+      const res = await axios.get(`${BASE_URL}/product/myProducts/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -111,7 +112,7 @@ const Dashboard = () => {
       }
 
       const res = await axios.put(
-        `http://localhost:8000/user/update/${userId}`,
+        `${BASE_URL}/user/update/${userId}`,
         formData,
         {
           headers: {

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import BASE_URL from "../config/api";
 
 const ResetPassword = () => {
   const location = useLocation(); // Access the passed state
@@ -29,7 +30,7 @@ const ResetPassword = () => {
     try {
       setLoading(true);
 
-      const res = await axios.post(`http://localhost:8000/user/reset-password`, {
+      const res = await axios.post(`${BASE_URL}/user/reset-password`, {
         email,
         newPassword,
         confirmPassword

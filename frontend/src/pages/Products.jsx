@@ -4,6 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import ProductCards from "../components/ProductCards";
 import { useSearchParams } from "react-router-dom";
+import BASE_URL from "../config/api";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -31,7 +32,7 @@ const Products = () => {
   const getAllProducts = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:8000/product/allProducts");
+      const res = await axios.get(`${BASE_URL}/product/allProducts`);
 
       if (res.data.success) {
         setProducts(res.data.products);

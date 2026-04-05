@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import ShowAuthPopUp from "../components/ShowAuthPopUp";
 import ChatBox from "../components/Chatbox";
+import BASE_URL from "../config/api";
 
 const ViewProduct = () => {
   const currentUser = JSON.parse(localStorage.getItem("user"));
@@ -29,7 +30,7 @@ const ViewProduct = () => {
       const accessToken = localStorage.getItem("accessToken");
 
       const res = await axios.delete(
-        `http://localhost:8000/product/delete/${product._id}`,
+        `${BASE_URL}/product/delete/${product._id}`,
         {
           headers: { Authorization: `Bearer ${accessToken}` },
         },
@@ -55,7 +56,7 @@ const ViewProduct = () => {
 
       if (!saved) {
         await axios.post(
-          `http://localhost:8000/user/saveProduct/${productId}`,
+          `${BASE_URL}/user/saveProduct/${productId}`,
           {},
           {
             headers: {
@@ -67,7 +68,7 @@ const ViewProduct = () => {
         toast.success("Product saved");
       } else {
         await axios.delete(
-          `http://localhost:8000/user/UnsaveProduct/${productId}`,
+          `${BASE_URL}/user/UnsaveProduct/${productId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -79,7 +80,7 @@ const ViewProduct = () => {
       }
 
       const res = await axios.get(
-        `http://localhost:8000/user/isSaved/${productId}`,
+        `${BASE_URL}/user/isSaved/${productId}`,
         {
           headers: { Authorization: `Bearer ${accessToken}` },
         },
@@ -106,7 +107,7 @@ const ViewProduct = () => {
     const fetchProduct = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:8000/product/${productId}`,
+          `${BASE_URL}/product/${productId}`,
         );
 
         if (data.success) {
@@ -129,7 +130,7 @@ const ViewProduct = () => {
         const accessToken = localStorage.getItem("accessToken");
 
         const res = await axios.get(
-          `http://localhost:8000/user/isSaved/${productId}`,
+          `${BASE_URL}/user/isSaved/${productId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,

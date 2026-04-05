@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Eye, EyeOff } from "lucide-react";
+import BASE_URL from "../config/api";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -29,7 +30,7 @@ const Signup = () => {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:8000/user/register",
+        `${BASE_URL}/user/register`,
         {
           firstName,
           lastName,

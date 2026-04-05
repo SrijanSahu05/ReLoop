@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductCards from "./ProductCards";
+import BASE_URL from "../config/api";
 
 const NewlyAddedSection = () => {
   const [products, setProducts] = useState([]);
@@ -13,7 +14,7 @@ const NewlyAddedSection = () => {
       try {
         setLoading(true);
         const { data } = await axios.get(
-          "http://localhost:8000/product/allProducts",
+          `${BASE_URL}/product/allProducts`
         );
 
         if (data.success) {

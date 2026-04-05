@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Menu, Repeat, X, LogOut, User as UserIcon } from "lucide-react";
+import BASE_URL from "../config/api";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:8000/user/logout",
+        `${BASE_URL}/user/logout`,
         {},
         {
           headers: {
